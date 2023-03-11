@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 // import jsPDF from 'jspdf';
 
-export default function TextForm(props) {
+export default function TextForm(props) { 
+
 const handleUpClick = ()=> {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to uppercase!", "success");
 }
 
 const handleLoClick = ()=> {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to lowercase!", "success");
 }
 // const textAreaRef = useRef(null);
 // const handleDownloadText = ()=> {
@@ -21,13 +24,16 @@ const handleLoClick = ()=> {
 const handleRemoveSpaces = ()=> {
     let newText = text.replace(/\s+/g, ' ');
     setText(newText);
+    props.showAlert("Extra Spaces Removed!", "success");
 }
 
 const handleCopyText = ()=> {
     navigator.clipboard.writeText(text)
+    props.showAlert("Copied to clipboard!", "success");
 }
 const handleClearText = ()=> {
      setText("");
+     props.showAlert("Text Cleared!", "success");
 }
 const handleOnChange = (event)=> {
     setText(event.target.value);    
@@ -36,13 +42,13 @@ const handleOnChange = (event)=> {
 
 const [text, setText] = useState('');
   return (
-    <div className="container my-3" style={{color : props.mode==='light'?'#0b336e':'white'}}>
+    <div className="container my-3" style={{color : props.mode==='light'?'black':'white'}}>
         <h1>{props.heading}</h1>
       <div className="mb-3">        
         <textarea
           className="form-control"
           onChange = {handleOnChange}
-          style={{backgroundColor: props.mode==='light'?'white':'grey',color: props.mode==='light'?'#0b336e':'white'}}
+          style={{backgroundColor: props.mode==='light'?'white':'grey',color: props.mode==='light'?'black':'white'}}
           id="myBox"          
           value={text}
           rows="8"
